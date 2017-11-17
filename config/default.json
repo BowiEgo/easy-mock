@@ -64,6 +64,7 @@
   },
   "fe": {
     "uploadAPI": "",
+    "copyright": "",
     "storageNamespace": "easy-mock_",
     "timeout": 25000,
     "publicPath": "/dist/",
