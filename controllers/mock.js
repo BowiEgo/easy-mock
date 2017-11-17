@@ -477,3 +477,61 @@ exports.exportMock = function * () {
 
   this.body = content
 }
+
+exports.generateAPI = function * () {
+  const ids = this.checkBody('ids').empty().type('array').value
+  const projectId = this.checkBody('project_id').empty().value
+  let mocks
+
+  if (this.errors) {
+    this.body = this.util.refail(null, 10001, this.errors)
+    return
+  }
+
+  if (projectId) {
+    mocks = yield mockProxy.find({
+      project: projectId
+    })
+  } else if (!_.isEmpty(ids)) {
+    mocks = yield mockProxy.find({
+      _id: {
+        $in: ids
+      }
+    })
+  } else {
+    this.body = this.util.refail('参数不能为空')
+    return
+  }
+
+  if (_.isEmpty(mocks)) {
+    this.body = this.util.refail('Mock 不存在')
+    return
+  }
+
+  this.set(
+    'Content-disposition',
+    'attachment; filename=Easy-Mock-API-JS.zip'
+  )
+
+  const zip = new JSZip()
+
+  let data = ''
+  mocks.forEach((mock) => {
+    let dataTemp = 
+`export function getName() {
+  return new Promise((resolve, reject) => {
+    fetch('${mock.url}').then(resp => {
+      return resp.json()
+    })
+  })
+}
+
+`
+    data += dataTemp
+  })
+  zip.file(`${mocks[0].project.url}.js`, data)
+
+  const content = yield zip.generateAsync({ type: 'nodebuffer' })
+
+  this.body = content
+}

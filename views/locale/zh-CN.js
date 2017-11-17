@@ -157,6 +157,7 @@ export default {
       nav: ['接口列表', '设置'],
       workbench: '工作台',
       download: '打包下载 | 下载',
+      generateAPI: '生成API代码',
       member: '项目成员',
       keyboards: [
         { category: '导航' },

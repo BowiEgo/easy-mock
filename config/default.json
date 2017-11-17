@@ -28,6 +28,7 @@
     "/api/u/register",
     "/api/mock/by_projects",
     "/api/mock/export",
+    "/api/mock/generateAPI",
     "/api/wallpaper"
   ],
   "mockExample": {
