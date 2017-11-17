@@ -157,6 +157,7 @@ export default {
       nav: ['Mock List', 'Setting'],
       workbench: 'Work Station',
       download: 'Downlaod as zip file | Download',
+      generateAPI: 'generate API Code',
       member: 'Member List',
       keyboards: [
         { category: 'Navigation' },

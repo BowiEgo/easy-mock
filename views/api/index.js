@@ -155,7 +155,8 @@ const mock = {
   create: config => createAPI('/mock/create', 'post', config),
   update: config => createAPI('/mock/update', 'post', config),
   delete: config => createAPI('/mock/delete', 'post', config),
-  export: config => createExportForm('/mock/export', config)
+  export: config => createExportForm('/mock/export', config),
+  generateAPI: config => createExportForm('/mock/generateAPI', config)
 }
 
 const group = {
