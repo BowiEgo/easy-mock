@@ -1,9 +1,5 @@
 <template>
   <div class="em-proj-detail">
-    <form method="POST" action="http://127.0.0.1:7300/api/mock/generateAPI">
-      <input name="project_id" value="5a0d59d0de59b7324dcaaa5a">
-      <button onclick="this.form.submit()"></button>
-    </form>
     <em-header
       icon="cube"
       :title="project.name"
