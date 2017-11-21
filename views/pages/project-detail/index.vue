@@ -7,7 +7,7 @@
       :nav="nav"
       v-model="pageName">
     </em-header>
-    <editor v-model="editor"></editor>
+    <editor v-model="editor" @exportAPI="exportAPI"></editor>
     <div v-shortkey="['tab']" @shortkey="handleKeyTab()"></div>
     <em-keyboard-short v-model="keyboards"></em-keyboard-short>
     <Back-top>
@@ -57,6 +57,7 @@
               <Icon type="loop"></Icon> {{$t('p.detail.syncSwagger.action')}}
             </li>
             <li @click="download"><Icon type="code-download"></Icon> {{$tc('p.detail.download', 1)}}</li>
+            <li @click="openGenerateAPIEditor"><Icon type="code-download"></Icon> {{$tc('p.detail.generateAPI')}}</li>
           </ul>
         </div>
         <div class="em-proj-detail__members" v-if="project.members.length">
@@ -265,6 +266,27 @@ export default {
         api.mock.export(ids)
       } else {
         api.mock.export(this.project._id)
+      }
+    },
+    openGenerateAPIEditor (mockId) {
+      let data = ''
+      this.list.map(item => {
+        let dataTemp = "export function getName() { return new Promise((resolve, reject) => { fetch('" + item.url + "').then(resp => { return resp.json() }) }) } "
+        data += dataTemp
+      })
+      this.editor = {}
+      this.$set(this.editor, 'mode', data)
+      this.$set(this.editor, 'isGenerateAPI', true)
+      this.$set(this.editor, 'show', true)
+    },
+    exportAPI (mockId) {
+      if (typeof mockId === 'string') {
+        const ids = this.selection.length
+          ? this.selection.map(item => item._id)
+          : [mockId]
+        api.mock.exportAPI(ids)
+      } else {
+        api.mock.exportAPI(this.project._id)
       }
     },
     updateBySwagger () {

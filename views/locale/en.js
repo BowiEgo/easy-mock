@@ -157,6 +157,7 @@ export default {
       nav: ['Mock List', 'Setting'],
       workbench: 'Work Station',
       download: 'Downlaod as zip file | Download',
+      generateAPI: 'generate API Code',
       member: 'Member List',
       keyboards: [
         { category: 'Navigation' },
@@ -190,7 +191,7 @@ export default {
         title: ['Update Mock', 'Create New Mock'],
         action: ['Updae', 'Create'],
         autoClose: 'Auto Close',
-        control: ['Format', 'Preview', 'Close'],
+        control: ['Format', 'Preview', 'Close', 'Generate API'],
         submit: {
           error: ['Mock data can\'t be null', 'Please check data definiation is correct.'],
           updateSuccess: 'Update Success'

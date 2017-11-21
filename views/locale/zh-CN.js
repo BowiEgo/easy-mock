@@ -157,6 +157,7 @@ export default {
       nav: ['接口列表', '设置'],
       workbench: '工作台',
       download: '打包下载 | 下载',
+      generateAPI: '生成API代码',
       member: '项目成员',
       keyboards: [
         { category: '导航' },
@@ -190,7 +191,7 @@ export default {
         title: ['更新接口', '创建接口'],
         action: ['更新', '创建'],
         autoClose: '自动关闭',
-        control: ['格式化', '预览', '关闭'],
+        control: ['格式化', '预览', '关闭', '生成API代码'],
         submit: {
           error: ['接口数据不能为空。', '请检查数据定义是否符合要求。'],
           updateSuccess: '更新成功'

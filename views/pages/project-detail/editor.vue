@@ -7,8 +7,9 @@
       <div class="panel-info">
         <em-spots :size="10"></em-spots>
         <div class="wrapper">
-          <h2>{{isEdit ? $t('p.detail.editor.title[0]') : $t('p.detail.editor.title[1]')}}</h2>
-          <div class="em-editor__form">
+          <h2 v-if="!value.isGenerateAPI">{{isEdit ? $t('p.detail.editor.title[0]') : $t('p.detail.editor.title[1]')}}</h2>
+          <!-- <h2 v-if="value.isGenerateAPI">{{$t('p.detail.editor.title[2]')}}</h2> -->
+          <div v-if="!value.isGenerateAPI" class="em-editor__form">
             <Form label-position="top">
               <Form-item label="Method">
                 <i-select v-model="temp.method">
@@ -34,8 +35,9 @@
           <div class="em-editor__control">
             <div class="em-proj-detail__switcher">
               <ul>
-                <li @click="format">{{$t('p.detail.editor.control[0]')}}</li>
+                <li @click="format" v-if="!value.isGenerateAPI">{{$t('p.detail.editor.control[0]')}}</li>
                 <li @click="preview" v-if="isEdit">{{$t('p.detail.editor.control[1]')}}</li>
+                <li @click="generateAPI" v-if="value.isGenerateAPI">{{$t('p.detail.editor.control[3]')}}</li>
                 <li @click="close">{{$t('p.detail.editor.control[2]')}}</li>
               </ul>
             </div>
@@ -113,7 +115,7 @@ export default {
           this.codeEditor.setValue(this.temp.mode)
         } else {
           this.temp.url = ''
-          this.temp.mode = '{"data": {}}'
+          this.temp.mode = this.value.isGenerateAPI ? this.value.mode : '{"data": {}}'
           this.temp.method = 'get'
           this.temp.description = ''
           this.codeEditor.setValue(this.temp.mode)
@@ -142,6 +144,9 @@ export default {
     close () {
       this.value.show = false
       this.$emit('input', this.value)
+    },
+    generateAPI () {
+      this.$emit('exportAPI')
     },
     submit () {
       const mockUrl = this.convertUrl(this.temp.url)

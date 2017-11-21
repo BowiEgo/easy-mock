@@ -44,7 +44,6 @@ app
   .use(koaBunyanLogger.requestIdContext())
   .use(requestLogger)
   .use(cors({
-    methods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
     credentials: true,
     maxAge: 2592000
   }))
